@@ -47,7 +47,7 @@ export class App {
   constructor(private http: HttpClient) { }
   todoResource = rxResource({
     stream: () => 
-      this.http.get<TodoResponse>(`http://172.21.83.66:8000/api/resource/task`).pipe(
+      this.http.get<TodoResponse>(`http://172.21.83.66:8000/api/resource/task/?fields=["*"]`).pipe(
       tap(res => console.log(res.data,"res")),
       map(item => item.data)
     )
