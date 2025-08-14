@@ -24,7 +24,7 @@ export interface Todo {
   title: string;
   description: string;
   status: string;
-  is_completed: boolean;
+  is_completed: any;
   priority: string;
   order_by: number;
 }
@@ -49,7 +49,11 @@ export class App {
     stream: () => 
       this.http.get<TodoResponse>(`http://172.21.83.66:8000/api/resource/task/?fields=["*"]`).pipe(
       tap(res => console.log(res.data,"res")),
-      map(item => item.data)
+      map(item => item.data),
+      map(todos => todos.map(todo =>({
+        ...todo,
+        is_completed: todo.is_completed === 1
+      } as Todo)))
     )
   })
 }
