@@ -1,5 +1,7 @@
 import { Component, signal } from '@angular/core';
-import { MatListModule } from '@angular/material/list';
+import { MatCardModule } from '@angular/material/card';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { rxResource } from '@angular/core/rxjs-interop';
 import { HttpClient } from '@angular/common/http';
 import { HttpInterceptorFn } from '@angular/common/http';
@@ -33,7 +35,11 @@ export interface TodoResponse{
 
 @Component({
   selector: 'app-root',
-  imports: [MatListModule],
+  imports: [
+    MatCardModule,
+    MatCheckboxModule,
+    MatProgressSpinnerModule
+  ],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })
@@ -41,7 +47,7 @@ export class App {
   constructor(private http: HttpClient) { }
   todoResource = rxResource({
     stream: () => 
-      this.http.get<TodoResponse>(`http://172.21.83.66:8000/api/resource/task`).pipe(
+      this.http.get<TodoResponse>(`http://172.21.83.66:8000/api/resource/task/?fields=["*"]`).pipe(
       tap(res => console.log(res.data,"res")),
       map(item => item.data)
     )
