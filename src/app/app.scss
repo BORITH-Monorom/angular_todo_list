@@ -1,0 +1,56 @@
+:host {
+  display: block;
+  padding: 24px;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.loading-spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+}
+
+.todo-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+}
+
+mat-card {
+  transition: all 0.2s ease-in-out;
+}
+
+mat-card.completed {
+  opacity: 0.6;
+}
+
+mat-card.completed mat-card-title,
+mat-card.completed mat-card-content {
+  text-decoration: line-through;
+}
+
+mat-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+mat-card-actions {
+  display: flex;
+  justify-content: flex-end;
+  padding: 8px 16px;
+}
+
+body {
+  background: linear-gradient(to right, #ece9e6, #ffffff);
+}

@@ -1,15 +1,25 @@
-<mat-selection-list>
-@if(todoResource.status() === "loading"){
-    @for (_ of [1,2,3,4]; track _) {
-      <mat-list-option>
-        <span matListItemTitle>Loading...</span>
-      </mat-list-option>
-    }
+<div class="container">
+  <h1>My Todo List</h1>
+  @if(todoResource.status() === "loading"){
+    <div class="loading-spinner">
+      <mat-spinner></mat-spinner>
+    </div>
   } @else {
+    <div class="todo-list">
       @for(todo of todoResource.value(); track todo){
-      <mat-list-option>
-        <span matListItemTitle>{{todo.name}}</span>
-      </mat-list-option>
-    }
+        <mat-card [class.completed]="todo.is_completed">
+          <mat-card-header>
+            <mat-card-title>{{todo.name}}</mat-card-title>
+            <mat-card-subtitle>{{todo.priority}}</mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content>
+            <p>{{todo.description}}</p>
+          </mat-card-content>
+          <mat-card-actions>
+            <mat-checkbox [checked]="todo.is_completed"></mat-checkbox>
+          </mat-card-actions>
+        </mat-card>
+      }
+    </div>
   }
-</mat-selection-list>
+</div>
